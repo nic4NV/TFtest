@@ -56,7 +56,7 @@ class User {
     //ВАЛИДАЦИЯ!!!
 
     public static function checkName($name) {   //валидация имени и фамилии
-        if (preg_match('#^[A-ZА-ЯЁa-zа-яё\-]{1,20}$#u', $name))  { 
+        if (preg_match('#[A-ZА-ЯЁa-zа-яё\-]{2,20}$#u', $name))  { 
             return true;
         }
         return false; 
@@ -84,7 +84,7 @@ class User {
     }
     
     public static function checkCity($city) {   //валидация названия города
-        if (preg_match('#^[A-ZА-ЯЁa-zа-яё\-]{1,30}$#u', $city))  { 
+        if (preg_match('#[A-ZА-ЯЁa-zа-яё\-]{2,30}$#u', $city))  { 
             return true;
         }
         return false; 

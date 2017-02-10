@@ -2,7 +2,7 @@
 
 return array(
     //Слевая ЧПУ, справа Ч не очень ПУ
-    'user/logout' => 'user/logout', //UserController -> actionLogout
+    
     
     'agreement' => 'site/agreement', //SiteController -> actionAgreement
     
@@ -11,6 +11,8 @@ return array(
     'login' => 'user/login', //UserController -> actionLogin
     
     'user/([0-9]+)' => 'user/logged/$1', //UserController -> actionLogged
+    
+    'logout' => 'user/logout', //UserController -> actionLogout
     
     '' => 'site/index', //SiteController -> actionIndex
     

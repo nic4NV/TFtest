@@ -7,7 +7,8 @@ class UserController
     
         public function actionRegister() //страница регистрации
     {
-        $name = ''; //инициализируем переменные
+        $firstName = ''; //инициализируем переменные
+        $secondName = '';
         $email = '';
         $password = '';
         $passwordConf = '';
@@ -15,7 +16,7 @@ class UserController
         $sex = '';
         $birthDate = '';
         
-        $flood = Flood::checkFlood(); 
+        $flood = FloodControl::checkFlood("1 HOUR"); // аргумент - время между попытками регистрации с одного ip. SQL
         
         if (isset($_POST['submit'])) {   //если форма отправлена
             $firstName = $_POST['first_name'];
@@ -34,10 +35,10 @@ class UserController
             $errors = false;
             
             if (!User::checkName($firstName)) {   //заполняем массив $errors
-                $errors[] = 'Имя должно иметь от двух до двадцати букв и начинаться с большой буквы!';
+                $errors[] = 'Имя должно иметь от двух до двадцати букв!';
             }
             if (!User::checkName($secondName)) {   
-                $errors[] = 'Фамилия должна иметь от двух до двадцати букв и начинаться с большой буквы!';
+                $errors[] = 'Фамилия должна иметь от двух до двадцати букв!';
             }
             if (!User::checkEmail($email)) {
                 $errors[] = 'Неправильный Email!';
@@ -52,14 +53,18 @@ class UserController
                 $errors[] = 'Пожалуйста, укажите Вашу дату рождения!';
             }
             if (!User::checkCity($city)) {   
-                $errors[] = 'Название города должно иметь от двух до тридцати букв и начинаться с большой буквы!';
+                $errors[] = 'Название города должно иметь от двух до тридцати букв!';
             }
             if (User::checkEmailExists($email)) {
                 $errors[] = 'Данный Email уже зарегестрирован';
             }
+            if ($flood == true) {
+                $errors[] = 'Вы совешили регистрацию совсем недавно, попробуйте позже'; //пользователь это вообще не увидит. Но пусть будет еще одна блокировка, на всякий случай
+            }
             if ($errors == false) {   //и если нет ошибок
                 $result = User::register($firstName,$secondName, $email, $password, $city, $sex, $birthDate);   //посылаем данные на сервер
             }
+            
         }
         require_once(ROOT . '/views/user/register.php');
         return true;

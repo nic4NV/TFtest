@@ -1,6 +1,6 @@
 <?php include_once(ROOT . '/views/layouts/header.php'); ?>
 
-<div class="row">
+<div style = 'padding-top: 70px;' class="row">
     <div class="col-md-8 col-md-offset-2">
         <h2>Пользовательское соглашение</h2>
 
@@ -13,6 +13,5 @@
     </div>
 </div>
 
-<?php include_once(ROOT . '/views/layouts/footer.php'); ?>
     
 

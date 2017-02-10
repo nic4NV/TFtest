@@ -12,13 +12,31 @@
     </head><!--/head-->
 
     <body>
-        <div class="alert alert-info" role="alert"> <!-- header -->
-            <div class="cal-md-9 col-md-offset-2">
-                <p>nic4NV@yandex.ru</p>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-md-offset-2">
-                    <a href="/"><h1>TFtest</h1> </a>
+        <nav  role="navigation" class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-brand">Бренд</a>
+                </div>
+                <!-- Collection of nav links and other content for toggling -->
+                <div id="navbarCollapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Главная</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <?php if (!isset($_SESSION['user'])): ?>
+                            <li><a href="/registration">Регистрация</a></li>
+                            <li><a href="/login">Войти</a></li>
+                        <?php else: ?>
+                            <li><a href="/logout">Выйти</a></li>
+                        <?php endif; ?> 
+                    </ul>
                 </div>
             </div>
-        </div>  <!-- end header -->
+        </nav>  <!-- end header -->
