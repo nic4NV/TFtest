@@ -18,7 +18,7 @@ class UserController
         
         $flood = FloodControl::checkFlood("1 HOUR"); // аргумент - время между попытками регистрации с одного ip. SQL
         
-        if (isset($_POST['submit'])) {   //если форма отправлена
+        if (isset($_POST['first_name'])) {   //если форма отправлена
             $firstName = $_POST['first_name'];
             $secondName = $_POST['second_name'];
             $email = $_POST['email'];
@@ -76,7 +76,7 @@ class UserController
         $email = ''; //инициализируем переменные
         $password = '';
         
-        if (isset($_POST['submit'])) { //если форма отправлена
+        if (isset($_POST['email'])) { //если форма отправлена
             $email = $_POST['email'];
             $password = $_POST['password'];
             
@@ -97,7 +97,7 @@ class UserController
             } else {
                 User::auth($userId);
                 //иначе (если есть такой пользователь) попадаем на страницу пользователя
-                header("Location: /user/$userId");
+     //           header("Location: /user/$userId");
             }
         }
         

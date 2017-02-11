@@ -2,18 +2,17 @@
 
 <section>
     <div style = 'padding-top: 70px;' class='container'>
-        <div class='row'>
             <?php if (!$flood): ?>   <!-- ЕСЛИ последня регистрация была БОЛЕЕ ЧАСА назад, то -->
-                <div class='col-sm-4 col-sm-offset-4 padding-right'>
+                <div class='col-sm-4 col-sm-offset-4 padding-right' id="inform">
 
                     <?php if (isset($result)): ?>  <!-- если все валидно, то -->
                         <p>Вы были зарегистрированы! Теперь можете <a href = "/login">войти на сайт!</a> </p>
                     <?php else: ?> <!-- иначе здесь выводятся ошибки -->
                         <?php if (isset($errors) && is_array($errors)): ?>
 
-                            <div class="panel panel-danger">
+                            <div class="panel panel-danger" >
                                 <div class="panel-heading">Некоторые поля заполнены неверно:</div>
-                                <div class="panel-body">
+                                <div class="panel-body" >
                                     <ul> 
                                         <?php foreach ($errors as $error): ?>
                                             <li> <?php echo $error; ?> </li>
@@ -28,7 +27,7 @@
                             <div class="panel-heading">Регистрация на сайте</div>
                             <div class="panel-body">
 
-                                <form role="form" id='regForm' action='#' method='post'>
+                                <form role="form" id='regForm' action="javascript:void(null);" onsubmit="call()" method='post'>
 
                                     <div class="form-group"> <!-- Имя -->
                                         <label for="first_name">Ваше имя</label>
@@ -126,7 +125,7 @@
                     <p>Вернуться на <a href="/">главную страницу</a></p>
                 <?php endif; ?>
             </div>
-        </div>
+            </div>
 </section>
 
 
@@ -142,7 +141,21 @@
     }
 </script>
 
+    <script type="text/javascript" language="javascript"> <!-- отправляем форму асинхронно -->
+     	function call() {
+     	  var msg   = $('#regForm').serialize(); 
+            $.ajax({
+              type: 'POST',
+              url: '/registration',
+              data: msg,
+              success: function(data) {
+                  $('#inform').html(data);
+              },
+              error:  function(xhr, str){
+    	    alert('Возникла ошибка: ' + xhr.responseCode);
+              }
+            });
+        }
+    </script>
 
 
-
-        
