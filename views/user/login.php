@@ -1,9 +1,9 @@
 <?php include ROOT . '/views/layouts/header.php'; ?>
 
 <section>
-    <div style = 'padding-top: 70px;' class='container'>
+    <div style = 'padding-top: 70px;' class='container' id="inform">
 
-        <div class='col-sm-4 col-sm-offset-4 padding-right' id="inform">
+        <div class='col-sm-4 col-sm-offset-4 padding-right'>
 
             <?php if (isset($errors) && is_array($errors)): ?> <!-- здесь выводятся ошибки, если есть -->
                 <div class="panel panel-danger">
